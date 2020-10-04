@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}Cart-EasyOrder System{% endblock title %}</title>
+{% block main_content %}
+
+<!-- Shopping Cart -->
+<div class="shopping-cart section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <!-- Shopping Summery -->
+        <table class="table shopping-summery">
+          <thead>
+            <tr class="main-hading">
+              <th>PRODUCT</th>
+              <th>NAME</th>
+              <th class="text-center">UNIT PRICE</th>
+              <th class="text-center">QUANTITY</th>
+              <th class="text-center">TOTAL</th> 
+              <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% for cart in carts %}
+            <tr>
+              <td class="image" data-title="No"><img src="{{ cart.item.feature_image.url }}" alt="#"></td>
+              <td class="product-des" data-title="Description">
+                <p class="product-name"><a href="#">{{ cart.item.title }}</a></p>
+                <p class="product-des">{{ cart.item.short_description }}</p>
+              </td>
+              <td class="price" data-title="Price"><span>৳{{ cart.item.price|floatformat:2 }} </span></td>
+              <td class="qty" data-title="Qty"><!-- Input Order -->
+                <div class="input-group">
+                  <a href="{% url 'order:decrease_cart' pk=cart.item.pk %}" class="w-auto mb-3"><span class="badge badge-light"><i class="fa fa-minus"></i></span></a> 
+                              {{ cart.quantity }}
+                  <a href="{% url 'order:increase_cart' pk=cart.item.pk %}" class="w-auto mb-3"><span class="badge badge-light"><i class="fa fa-plus"></i></span></a> 
+                </div>
+                <!--/ End Input Order -->
+              </td>
+              <td class="total-amount" data-title="Total"><span>৳{{ cart.get_total|floatformat:2 }}</span></td>
+              <td class="action" data-title="Remove"><a href="{% url 'order:remove' pk=cart.item.pk %}"><i class="ti-trash remove-icon"></i></a></td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <!--/ End Shopping Summery -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <!-- Total Amount -->
+        <div class="total-amount">
+          <div class="row">
+            <div class="col-lg-8 col-md-5 col-12">
+              <div class="left">
+                <!-- <div class="coupon">
+                  <form action="#" target="_blank">
+                    <input name="Coupon" placeholder="Enter Your Coupon">
+                    <button class="btn">Apply</button>
+                  </form>
+                </div>
+                <div class="checkbox">
+                  <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Shipping (+10$)</label>
+                </div> -->
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-7 col-12">
+              <div class="right">
+                <ul>
+                  <li>Cart Subtotal<span>৳{{ orders.get_totals|floatformat:2 }}</span></li>
+                  <li>Shipping<span>Free</span></li>
+                  <!-- <li>You Save<span>$20.00</span></li> -->
+                  <li class="last">You Pay<span>৳{{ orders.get_totals|floatformat:2 }}</span></li>
+                </ul>
+                <div class="button5">
+                  <a href="{% url 'payment:checkout' %}" class="btn">Checkout</a>
+                  <a href="{% url 'home:products' %}" class="btn">Continue shopping</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ End Total Amount -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ End Shopping Cart -->
+
+{% endblock main_content %}
+    
+    

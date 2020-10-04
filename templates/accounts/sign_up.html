@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block title %} SignUp | EasyOrder Systems{% endblock title %}
+  {% include 'stylesheet.html' %}
+</head>
+<body>
+<!-- Signup -->
+<div class="container space-2 mt-5">
+    <div class="row no-gutters">
+      <div class="col-4 offset-xl-4 offset-md-4">
+        <div id="signup" >
+            <!-- Title -->
+            <div class="text-center mb-7">
+              <h3 class="mb-0 signUpTitle">Create your account</h3>
+              <p>Fill out the form to get started.</p>
+            </div>
+            <!-- End Title -->
+        <form action="{% url 'accounts:sign_up' %}" method="post" class=mt-5>
+            {% csrf_token %}
+            <div class="js-form-message mb-4">
+                {{ signup_form|crispy }}
+                
+                
+              </div>
+              <div class="mb-3">
+                <button type="submit" class="btn btn-sm btn-primary btn-block">Sign Up</button>
+              </div>
+        </form>
+        
+            
+        
+            <div class="text-center mb-3">
+              <span class="divider divider-xs divider-text">OR</span>
+            </div>
+        
+            
+        
+            <div class="text-center">
+              <span class="small text-muted">Already have an account?</span>
+              <a class="small font-weight-bold" href="{% url 'accounts:login' %}">Sign In</a>
+            </div>
+          </div>
+      </div> 
+    </div>
+</div>
+{% include 'script.html' %}
+</body>
+</html>
+
+
+
+  <!-- End Signup -->

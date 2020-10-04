@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main_content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Your Order</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-5">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">OrderID</th>
+                                <th scope="col">Products</th>
+                                <th scope="col">Status</th>
+                                <th scope="Col">Date</th>
+                                <th scope="Col">Invoice</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              
+                              {% for order in orders %}
+                              <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><a href="">{{ order.orderID }}</a></td>
+                                <td>
+                                {% for item in order.orderitems.all %}
+                                    {{ item }} <br>
+                                {% endfor %}
+                                </td>
+                                <td><span class="badge badge-primary">Processing your order</span></td>
+                                <td>{{ order.payment_date|date:"M d, Y" }}</td>
+                                <td><a href="{% url 'payment:invoice' pk=order.pk %}">Invoice</a></td>
+                              </tr>
+                              {% endfor %}
+                                  
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 my-5 text-center">
+                <a href="{% url 'home:home' %}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock main_content %}
+    

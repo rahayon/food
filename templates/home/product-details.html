@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="container mt-5">
+  <div class="row my-5">
+    <aside class="col-md-5">
+      <img src="{{ products.feature_image.url }}" alt="">
+    </aside>
+    <aside class="col-md-7">
+      <h4>{{ products.title }}</h4>
+      <p class="mt-2">{{ products.short_description }}</p>
+      <p class="amount">price <span>৳{{ products.price }}</span></p>
+      <a href="{% url 'order:add_to_cart' pk=products.pk %}" class="btn btn-lg btn-outline-primary text-uppercase details"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+    </aside>
+  </div>
+</div>
+
+
+{% endblock main_content %}
+  

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<!-- Meta Tag -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name='copyright' content=''>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Title Tag  -->
+    <title>{% block title %}{% endblock title %}</title>
+
+  {% include 'stylesheet.html' %}
+</head>
+
+<body class="js">
+	
+	<!-- Preloader -->
+	<!-- <div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div> -->
+	<!-- End Preloader -->
+ {% include 'header.html' %}
+ 
+{% include 'messages.html' %}
+ 
+ 
+   
+ 
+  {% block main_content %}
+	  
+  {% endblock main_content %}
+  
+{% include 'footer.html' %}
+{% include 'script.html' %}
+
+</body>
+</html>
